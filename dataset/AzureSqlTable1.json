@@ -1,0 +1,33 @@
+{
+	"name": "AzureSqlTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "title",
+				"type": "char"
+			},
+			{
+				"name": "rating",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "moviedata"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,18 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=MSI\\MSSQLSERVER02;initial catalog=AdventureWorksLT2022",
+			"userName": "Ravi Reddy",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJkYmFiOGU3ZC1hMDcyLTQyOTktYWE5MS05MTcwZmNmNzNlMDkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1-SF",
+			"type": "IntegrationRuntimeReference"
+		},
+		"description": "TO connect to Onpremise Database"
+	}
+}

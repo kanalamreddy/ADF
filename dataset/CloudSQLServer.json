@@ -1,0 +1,74 @@
+{
+	"name": "CloudSQLServer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "NameStyle",
+				"type": "char"
+			},
+			{
+				"name": "Title",
+				"type": "char"
+			},
+			{
+				"name": "FirstName",
+				"type": "char"
+			},
+			{
+				"name": "MiddleName",
+				"type": "char"
+			},
+			{
+				"name": "LastName",
+				"type": "char"
+			},
+			{
+				"name": "Suffix",
+				"type": "char"
+			},
+			{
+				"name": "CompanyName",
+				"type": "char"
+			},
+			{
+				"name": "SalesPerson",
+				"type": "char"
+			},
+			{
+				"name": "EmailAddress",
+				"type": "char"
+			},
+			{
+				"name": "Phone",
+				"type": "char"
+			},
+			{
+				"name": "PasswordHash",
+				"type": "char"
+			},
+			{
+				"name": "PasswordSalt",
+				"type": "char"
+			},
+			{
+				"name": "rowguid",
+				"type": "char"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Customer"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

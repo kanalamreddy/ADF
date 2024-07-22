@@ -1,0 +1,9 @@
+{
+	"name": "LearningdatafactoryMogili",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8f8eefae-3552-4850-b14d-7f479c63c75b",
+		"tenantId": "b167eff8-0375-4d61-ba6f-d738ef353f93"
+	}
+}

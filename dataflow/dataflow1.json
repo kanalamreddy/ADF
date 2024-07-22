@@ -1,0 +1,126 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "MovieADLS"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          adult as string,",
+				"          belongs_to_collection as string,",
+				"          budget as string,",
+				"          genres as string,",
+				"          homepage as string,",
+				"          id as string,",
+				"          imdb_id as string,",
+				"          original_language as string,",
+				"          original_title as string,",
+				"          overview as string,",
+				"          popularity as string,",
+				"          poster_path as string,",
+				"          production_companies as string,",
+				"          production_countries as string,",
+				"          release_date as string,",
+				"          revenue as string,",
+				"          runtime as string,",
+				"          spoken_languages as string,",
+				"          status as string,",
+				"          tagline as string,",
+				"          title as string,",
+				"          video as string,",
+				"          vote_average as string,",
+				"          vote_count as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> MovieADLS",
+				"select1 filter(toInteger(runtime)>100) ~> filter1",
+				"MovieADLS select(mapColumn(",
+				"          adult,",
+				"          belongs_to_collection,",
+				"          budget,",
+				"          generes = genres,",
+				"          homepage,",
+				"          id,",
+				"          imdb_id,",
+				"          original_language,",
+				"          original_title,",
+				"          overview,",
+				"          popularity,",
+				"          poster_path,",
+				"          production_companies,",
+				"          production_countries,",
+				"          release_date,",
+				"          revenue,",
+				"          runtime,",
+				"          spoken_languages,",
+				"          status,",
+				"          tagline,",
+				"          title,",
+				"          video,",
+				"          vote_average,",
+				"          vote_count",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"filter1 derive(Year = year(toDate(release_date, 'dd-mm-yyyy'))) ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(Year,",
+				"          title),",
+				"     popularity = avg(toInteger(popularity))) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          year as integer,",
+				"          title as string,",
+				"          rating as decimal(10,2)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          year = Year,",
+				"          title,",
+				"          rating = popularity",
+				"     ),",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
